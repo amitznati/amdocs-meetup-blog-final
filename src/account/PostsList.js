@@ -23,9 +23,6 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import { Link as RouterLink } from 'react-router-dom';
 import {posts} from './postsMock';
 
-function createData(title, desc, id) {
-  return { title, desc, id };
-}
 
 const rows = posts;
 
@@ -302,8 +299,8 @@ export default function PostsList() {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component={RouterLink} to={`/posts/${row.id}`} id={labelId} scope="row" >
-                        {row.title}
+                      <TableCell component="th" id={labelId} scope="row" >
+                        <RouterLink to={`/posts/${row.id}`}>{row.title}</RouterLink>
                       </TableCell>
                       <TableCell >{row.desc}</TableCell>
                     </TableRow>

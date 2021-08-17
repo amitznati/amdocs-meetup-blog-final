@@ -45,7 +45,7 @@ export default function Blog() {
       <ScrollToTop />
       <CssBaseline/>
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections}/>
+        <Header title="Amdocs Meetup Blog" sections={sections}/>
         <main>
           <Switch>
             <Route exact path="/">

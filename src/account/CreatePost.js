@@ -30,7 +30,7 @@ export default function CreatePost() {
           />
         </Button>
         {values.image && <div>
-          <img src={URL.createObjectURL(values.image)} height={200} alt="uploaded image"/>
+          <img src={URL.createObjectURL(values.image)} height={200} alt="upload"/>
           <IconButton aria-label="delete" onClick={onImageRemove}>
             <DeleteIcon fontSize="large" />
           </IconButton>

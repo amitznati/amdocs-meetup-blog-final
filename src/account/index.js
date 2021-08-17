@@ -5,7 +5,7 @@ import {
   Link,
   useRouteMatch
 } from "react-router-dom";
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+// import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import {Container} from '@material-ui/core';
 import CreatePost from './CreatePost';
 import PostsList from './PostsList';
