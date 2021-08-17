@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Blog from './blog/Blog';
-
 
 function App() {
   return (
-    <Blog />
+    <React.Fragment>
+      <Blog />
+    </React.Fragment>
   );
 }
 

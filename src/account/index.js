@@ -8,6 +8,7 @@ import {
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import {Container} from '@material-ui/core';
 import CreatePost from './CreatePost';
+import PostsList from './PostsList';
 
 const AccountHome = () => {
   const { path, url } = useRouteMatch();
@@ -16,10 +17,13 @@ const AccountHome = () => {
       <h2>My Account</h2>
       <ul>
         <li>
-          <Link to={`${url}/postslist`}>postslist</Link>
+          <Link to={`${url}`}>Account Home</Link>
         </li>
         <li>
-          <Link to={`${url}/createpost`}>createpost</Link>
+          <Link to={`${url}/postslist`}>My Posts</Link>
+        </li>
+        <li>
+          <Link to={`${url}/createpost`}>Create New Post</Link>
         </li>
       </ul>
       <Switch>
@@ -27,7 +31,7 @@ const AccountHome = () => {
           home
         </Route>
         <Route exact path={`${url}/postslist`}>
-          Posts List
+          <PostsList />
         </Route>
         <Route exact path={`${url}/createpost`}>
           <CreatePost />

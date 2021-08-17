@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Markdown from './Markdown';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -54,7 +55,7 @@ export default function MainFeaturedPost(props) {
             <div >
               <Markdown source={post.desc} />
             </div>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" to={`posts/${post.id}`} component={RouterLink}>
               {/*{post.linkText}*/}
               Continue Reading...
             </Link>
