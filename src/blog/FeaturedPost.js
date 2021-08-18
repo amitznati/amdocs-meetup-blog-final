@@ -41,7 +41,7 @@ export default function FeaturedPost(props) {
                 {post.createdAt}
               </Typography>
               <div>
-                <Markdown>{`${post.desc.substring(0, 150)}...`}</Markdown>
+                <Markdown>{`${post.desc.substring(0, 80)}...`}</Markdown>
               </div>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
