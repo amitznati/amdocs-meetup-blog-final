@@ -43,6 +43,7 @@ Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at
   desc: `This blog post shows a few different types of content that are supported and styled with
 Material styles. Basic typography, images, and code are all supported.
 You can extend these by modifying \`Markdown.js\`.`,
+  createdAt: '2021-08-17T21:20:08.436Z'
 };
 const post2 = {
   id: 2,
@@ -64,6 +65,7 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
 Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.`,
   image: 'https://source.unsplash.com/random',
+  createdAt: '2021-08-18T21:20:08.436Z'
 };
 const post3 = {
   id: 3,
@@ -83,6 +85,7 @@ Aenean lacinia bibendum nulla sed consectetur.
 
 Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.`,
   image: 'https://source.unsplash.com/random',
+  createdAt: '2021-08-19T21:20:08.436Z'
 }
 
 const posts = [post1, post2, post3];
