@@ -5,12 +5,23 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function CreatePost() {
   const imageRef = React.createRef();
-  const [values, setValues] = React.useState({content: "**Hello world!!!**", desc: '', image: ''});
+  const [title, setTitle] = React.useState('');
+  const [desc, setDesc] = React.useState('');
+  const [content, setContent] = React.useState("**Hello world!!!**");
+  const [imageInput, setImageInput] = React.useState('');
+
   const onImageChange = ({target: {validity, files: [file]}}) =>
-    validity.valid && setValues({...values, image: file});
+    validity.valid && setImageInput(file);
   const onImageRemove = () => {
     imageRef.current.value = '';
-    setValues({...values, image: ''});
+    setImageInput('');
+  };
+  const onSubmit = () => {
+    const newPost = {title, desc, content};
+    console.log(newPost);
+    const image = imageInput;
+    if (!(title && desc && content && imageInput)) return;
+    console.log('saving post: ', newPost);
   }
   return (
     <Grid container spacing={2}>
@@ -18,7 +29,7 @@ export default function CreatePost() {
         <h3>Create New Post</h3>
       </Grid>
       <Grid item xs={12}>
-        <TextField label="Title" placeholder="Post Title" onChange={e => setValues({...values, title: e.target.value})}/>
+        <TextField label="Title" placeholder="Post Title" onChange={e => setTitle(e.target.value)}/>
         <Button variant="contained" component="label">
           Upload Image
           <input
@@ -29,8 +40,8 @@ export default function CreatePost() {
             onChange={onImageChange}
           />
         </Button>
-        {values.image && <div>
-          <img src={URL.createObjectURL(values.image)} height={200} alt="upload"/>
+        {imageInput && <div>
+          <img src={URL.createObjectURL(imageInput)} height={200} alt="upload"/>
           <IconButton aria-label="delete" onClick={onImageRemove}>
             <DeleteIcon fontSize="large" />
           </IconButton>
@@ -41,8 +52,8 @@ export default function CreatePost() {
       </Grid>
       <Grid item xs={12}>
         <MDEditor
-          value={values.desc}
-          onChange={desc => setValues({...values, desc})}
+          value={desc}
+          onChange={setDesc}
         />
       </Grid>
       <Grid item xs={12}>
@@ -50,9 +61,12 @@ export default function CreatePost() {
       </Grid>
       <Grid item xs={12}>
         <MDEditor
-          value={values.content}
-          onChange={content => setValues({...values, content})}
+          value={content}
+          onChange={setContent}
         />
+      </Grid>
+      <Grid item xs={12}>
+        <Button onClick={onSubmit} variant="contained" color="primary">Submit</Button>
       </Grid>
     </Grid>
   );

@@ -10,6 +10,9 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+
+  },
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
@@ -31,7 +34,7 @@ export default function Header(props) {
   const { sections, title } = props;
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <Toolbar className={classes.toolbar}>
         <Button size="small">Subscribe</Button>
         <Typography
@@ -67,7 +70,7 @@ export default function Header(props) {
           </Link>
         ))}
       </Toolbar>
-    </React.Fragment>
+    </div>
   );
 }
 

@@ -24,7 +24,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import {posts} from './postsMock';
 
 
-const rows = posts;
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -197,12 +196,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostsList() {
   const classes = useStyles();
+  const [rows, setRows] = React.useState([]);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  React.useEffect(() => {
+    setRows(posts);
+  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
