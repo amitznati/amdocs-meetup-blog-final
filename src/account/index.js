@@ -5,7 +5,7 @@ import {
   Link,
   useRouteMatch
 } from "react-router-dom";
-// import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import {Container} from '@material-ui/core';
 import CreatePost from './CreatePost';
 import PostsList from './PostsList';
@@ -14,6 +14,7 @@ const AccountHome = () => {
   const { path, url } = useRouteMatch();
   return (
     <Container>
+      <AmplifyAuthenticator>
       <h2>My Account</h2>
       <ul>
         <li>
@@ -37,6 +38,7 @@ const AccountHome = () => {
           <CreatePost />
         </Route>
       </Switch>
+      </AmplifyAuthenticator>
     </Container>
   )
 };

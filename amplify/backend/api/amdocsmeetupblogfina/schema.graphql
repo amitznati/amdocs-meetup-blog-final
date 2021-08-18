@@ -1,0 +1,31 @@
+type Post
+@model
+@auth(rules: [
+    {allow: public, operations: [read]},# public access for read
+    {allow: owner, ownerField: "username"}, # full access to owner, owner mapped by username field
+])
+@key(name: "postByUsername", fields: ["username"], queryField: "postByUsername")
+{
+    id: ID!
+    title: String!
+    desc: String!
+    content: String!
+    image: String
+    username: String
+    comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+}
+
+type Comment
+@model
+@key(name: "byPost", fields: ["postID", "content"])
+@auth(rules: [
+    {allow: public, operations: [read]},# public access for read
+    {allow: owner, ownerField: "username"}, # full access to owner, owner mapped by username field
+])
+{
+    id: ID!
+    postID: ID!
+    username: String
+    post: Post @connection(fields: ["postID"])
+    content: String!
+}

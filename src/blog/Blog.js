@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import {
@@ -12,8 +12,10 @@ import Footer from './Footer';
 import BlogHome from './BlogHome';
 import AccountHome from '../account';
 
-import {posts} from '../account/postsMock';
+// import {posts} from '../account/postsMock';
 import PostView from './PostView';
+import { API, graphqlOperation } from 'aws-amplify';
+import { listPosts } from '../graphql/queries';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -40,6 +42,14 @@ const sections = [
 
 
 export default function Blog() {
+  const [posts, setPosts] = useState([]);
+  const sortByDate = array => array.sort(function(a,b){
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+  useEffect(() => {
+    API.graphql(graphqlOperation(listPosts))
+      .then(postRes => setPosts(sortByDate(postRes.data.listPosts.items)));
+  }, []);
   return (
     <Router>
       <ScrollToTop />
@@ -49,10 +59,10 @@ export default function Blog() {
         <main>
           <Switch>
             <Route exact path="/">
-              <BlogHome posts={posts} />
+              {posts.length > 2 && <BlogHome posts={posts} />}
             </Route>
             <Route exact path="/posts/:postId">
-              <PostView post={posts[0]} />
+              <PostView />
             </Route>
             <Route path="/myaccount">
               <AccountHome />

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amdocsmeetupblogfina-dev-235604-authRole",
+      "UnauthRoleArn": "arn:aws:iam::947402827748:role/amplify-amdocsmeetupblogfina-dev-235604-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::947402827748:role/amplify-amdocsmeetupblogfina-dev-235604-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amdocsmeetupblogfina-dev-235604-deployment",
+      "UnauthRoleName": "amplify-amdocsmeetupblogfina-dev-235604-unauthRole",
+      "StackName": "amplify-amdocsmeetupblogfina-dev-235604",
+      "StackId": "arn:aws:cloudformation:us-east-1:947402827748:stack/amplify-amdocsmeetupblogfina-dev-235604/60fc6e50-fed4-11eb-ba58-0e8bc15d151d",
+      "AmplifyAppId": "dbtqau98639p3"
+    },
+    "categories": {
+      "auth": {
+        "amdocsmeetupblogfina15f9df14": {}
+      }
+    }
+  }
+}
