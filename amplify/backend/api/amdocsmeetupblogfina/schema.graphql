@@ -1,5 +1,5 @@
 type Post
-@model
+@model(subscriptions: null)
 @auth(rules: [
     {allow: public, operations: [read]},# public access for read
     {allow: owner, ownerField: "username"}, # full access to owner, owner mapped by username field
@@ -28,4 +28,9 @@ type Comment
     username: String
     post: Post @connection(fields: ["postID"])
     content: String!
+}
+
+type Subscription {
+    onCreatePost: Post @aws_subscribe(mutations: ["createPost"]) @aws_api_key
+    onUpdatePost: Post @aws_subscribe(mutations: ["updatePost"]) @aws_api_key
 }
