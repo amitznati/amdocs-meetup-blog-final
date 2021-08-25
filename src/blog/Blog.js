@@ -14,7 +14,7 @@ import AccountHome from '../account';
 import PostView from './PostView';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listPosts } from '../graphql/queries';
-import {onCreatePost, onUpdatePost} from '../graphql/subscriptions'
+import {onCreatePost} from '../graphql/subscriptions'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,24 +42,26 @@ const sections = [
 
 export default function Blog() {
   const [posts, setPosts] = useState([]);
+
   const sortByDate = array => array.sort(function(a,b){
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
-  const fetchPosts = React.useCallback(() => {
-      API.graphql(graphqlOperation(listPosts))
-          .then(postRes => setPosts(sortByDate(postRes.data.listPosts.items)));
-  }, []);
 
   useEffect(() => {
-      fetchPosts();
+    API.graphql(graphqlOperation(listPosts))
+      .then(postRes => setPosts(sortByDate(postRes.data.listPosts.items)));
       const subscription = API.graphql(
-          graphqlOperation(onUpdatePost)
+          graphqlOperation(onCreatePost)
       ).subscribe({
-          next: fetchPosts,
+          next: ({value: {data: {onCreatePost: newPost}}}) => {
+            console.log(newPost);
+            console.log(posts);
+            setPosts([newPost, ...posts])
+          },
           error: error => console.warn(error)
       });
       return () => subscription.unsubscribe();
-  }, [fetchPosts]);
+  }, []);
   return (
     <Router>
       <ScrollToTop />

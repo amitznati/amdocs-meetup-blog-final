@@ -18,34 +18,37 @@ export default function CreatePost() {
     imageRef.current.value = '';
     setImageInput('');
   };
+
   const onSubmit = () => {
     const newPost = {title, desc, content};
     console.log(newPost);
     const image = imageInput;
     if (!(title && desc && content && imageInput)) return;
-    API.graphql({
-      query: createPost,
-      variables: {input: newPost},
-      authMode: 'AMAZON_COGNITO_USER_POOLS'
-    }).then(res => {
-      const postId = res.data.createPost.id;
-      // uploading the image to S3 Bucket
-      Storage.put(
-        `${postId}.${image.name.split('.').pop()}`,
-        image,
-        {contentType: image.type})
-        .then(storageRes => {
-          // updating postImage field with the S3 object key
-          API.graphql({
-            query: updatePost,
-            variables: {input: {id: postId, image: `https://d1xcntdnjjxto4.cloudfront.net/${storageRes.key}`}},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-          }).then(updatedPost => {
-            // setValues({content: "**Hello world!!!**", desc: ''});
-            onImageRemove();
-          });
+
+    function getImageName() {
+      const fileNameArr = image.name.split('.');
+      const imageFileExt = fileNameArr.pop();
+      return `${fileNameArr.join('.')}_${Date.now()}.${imageFileExt}`;
+    }
+
+    const imageFileName = getImageName();
+    newPost.image = `https://d1xcntdnjjxto4.cloudfront.net/${imageFileName}`;
+
+    Storage.put(
+      imageFileName,
+      image,
+      {contentType: image.type})
+      .then(storageRes => {
+        console.log(storageRes);
+        API.graphql({
+          query: createPost,
+          variables: {input: newPost},
+          authMode: 'AMAZON_COGNITO_USER_POOLS'
+        }).then(() => {
+          // setValues({content: "**Hello world!!!**", desc: ''});
+          // onImageRemove();
         });
-    });
+      });
   }
   return (
     <Grid container spacing={2}>
