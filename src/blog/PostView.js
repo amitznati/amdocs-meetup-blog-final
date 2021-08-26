@@ -14,12 +14,12 @@ export default function PostView() {
     <div>
       <h1>{post.title}</h1>
       <h5>
-        <Markdown source={post.desc} />
+        <Markdown>{post.desc}</Markdown>
       </h5>
       <div style={{textAlign: 'center'}}>
         <img src={post.image} style={{maxHeight: 500, maxWidth: '100%'}} alt={post.title} />
       </div>
-      <Markdown source={post.content} />
+      <Markdown>{post.content}</Markdown>
     </div>
   )
 }

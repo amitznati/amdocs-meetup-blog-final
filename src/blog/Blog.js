@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import {
@@ -39,35 +39,42 @@ const sections = [
 ];
 
 
-export default function Blog() {
-  const [posts, setPosts] = useState([]);
-  const sortByDate = array => array.sort(function(a,b){
+export default class Blog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: this.sortByDate(postsMocks)
+    }
+  }
+
+  sortByDate = array => array.sort(function (a, b) {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
-  useEffect(() => {
-    setPosts(sortByDate(postsMocks));
-  }, []);
-  return (
-    <Router>
-      <ScrollToTop />
-      <CssBaseline/>
-      <Container maxWidth="lg">
-        <Header title="Amdocs Meetup Blog" sections={sections}/>
-        <main>
-          <Switch>
-            <Route exact path="/">
-              {posts.length > 2 && <BlogHome posts={posts} />}
-            </Route>
-            <Route exact path="/posts/:postId">
-              <PostView />
-            </Route>
-            <Route path="/myaccount">
-              <AccountHome />
-            </Route>
-          </Switch>
-        </main>
-      </Container>
-      <Footer title="Footer" description="Something here to give the footer a purpose!"/>
-    </Router>
-  );
+
+  render() {
+    const {posts} = this.state;
+    return (
+      <Router>
+        <ScrollToTop/>
+        <CssBaseline/>
+        <Container maxWidth="lg">
+          <Header title="Amdocs Meetup Blog" sections={sections}/>
+          <main>
+            <Switch>
+              <Route exact path="/">
+                {posts.length > 2 && <BlogHome posts={posts}/>}
+              </Route>
+              <Route exact path="/posts/:postId">
+                <PostView/>
+              </Route>
+              <Route path="/myaccount">
+                <AccountHome/>
+              </Route>
+            </Switch>
+          </main>
+        </Container>
+        <Footer title="Footer" description="Something here to give the footer a purpose!"/>
+      </Router>
+    );
+  }
 }
