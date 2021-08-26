@@ -28,7 +28,7 @@ export default function CreatePost() {
     function getImageName() {
       const fileNameArr = image.name.split('.');
       const imageFileExt = fileNameArr.pop();
-      return `${fileNameArr.join('.')}_${Date.now()}.${imageFileExt}`;
+      return `${fileNameArr.join('.').replace(' ', '_')}_${Date.now()}.${imageFileExt}`;
     }
 
     const imageFileName = getImageName();

@@ -40,49 +40,59 @@ const sections = [
 ];
 
 
-export default function Blog() {
-  const [posts, setPosts] = useState([]);
+export default class Blog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: []
+    }
+  }
+  componentDidMount() {
+    API.graphql(graphqlOperation(listPosts))
+      .then(postRes => this.setState({posts: this.sortByDate(postRes.data.listPosts.items)}));
+    this.subscription = API.graphql(
+      graphqlOperation(onCreatePost)
+    ).subscribe({
+      next: ({value: {data: {onCreatePost: newPost}}}) => {
+        console.log(newPost);
+        this.setState(s => ({posts: [newPost, ...s.posts]}));
+      },
+      error: error => console.warn(error)
+    });
+  }
 
-  const sortByDate = array => array.sort(function(a,b){
+  componentWillUnmount() {
+    this.subscription.unsubscribe();
+  }
+
+  sortByDate = array => array.sort(function (a, b) {
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
-  useEffect(() => {
-    API.graphql(graphqlOperation(listPosts))
-      .then(postRes => setPosts(sortByDate(postRes.data.listPosts.items)));
-      const subscription = API.graphql(
-          graphqlOperation(onCreatePost)
-      ).subscribe({
-          next: ({value: {data: {onCreatePost: newPost}}}) => {
-            console.log(newPost);
-            console.log(posts);
-            setPosts([newPost, ...posts])
-          },
-          error: error => console.warn(error)
-      });
-      return () => subscription.unsubscribe();
-  }, []);
-  return (
-    <Router>
-      <ScrollToTop />
-      <CssBaseline/>
-      <Container maxWidth="lg">
-        <Header title="Amdocs Meetup Blog" sections={sections}/>
-        <main>
-          <Switch>
-            <Route exact path="/">
-              {posts.length > 2 && <BlogHome posts={posts} />}
-            </Route>
-            <Route exact path="/posts/:postId">
-              <PostView />
-            </Route>
-            <Route path="/myaccount">
-              <AccountHome />
-            </Route>
-          </Switch>
-        </main>
-      </Container>
-      <Footer title="Footer" description="Something here to give the footer a purpose!"/>
-    </Router>
-  );
+  render() {
+    const {posts} = this.state;
+    return (
+      <Router>
+        <ScrollToTop/>
+        <CssBaseline/>
+        <Container maxWidth="lg">
+          <Header title="Amdocs Meetup Blog" sections={sections}/>
+          <main>
+            <Switch>
+              <Route exact path="/">
+                {posts.length > 2 && <BlogHome posts={posts}/>}
+              </Route>
+              <Route exact path="/posts/:postId">
+                <PostView/>
+              </Route>
+              <Route path="/myaccount">
+                <AccountHome/>
+              </Route>
+            </Switch>
+          </main>
+        </Container>
+        <Footer title="Footer" description="Something here to give the footer a purpose!"/>
+      </Router>
+    );
+  }
 }

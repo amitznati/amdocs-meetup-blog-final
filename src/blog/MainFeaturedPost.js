@@ -9,16 +9,16 @@ import Markdown from './Markdown';
 import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  mainFeaturedPost: {
+  mainFeaturedPost: props => ({
     position: 'relative',
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: `url(${props.post ? props.post.image : ''})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-  },
+  }),
   overlay: {
     position: 'absolute',
     top: 0,
@@ -38,11 +38,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MainFeaturedPost(props) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const {post} = props;
-
   return (
-    <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${post.image})`}}>
+    <Paper className={classes.mainFeaturedPost}>
       {/* Increase the priority of the hero background image */}
       {<img style={{display: 'none'}} src={post.image} alt={post.title}/>}
       <div className={classes.overlay}/>
@@ -53,11 +52,11 @@ export default function MainFeaturedPost(props) {
               {post.title}
             </Typography>
             <div >
-              <Markdown source={post.desc} />
+              <Markdown>{post.desc}</Markdown>
             </div>
             <Link variant="subtitle1" to={`posts/${post.id}`} component={RouterLink}>
               {/*{post.linkText}*/}
-              Continue Reading...
+              Continue Reading
             </Link>
           </div>
         </Grid>

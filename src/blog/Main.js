@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { Link as RouterLink } from 'react-router-dom';
 import Markdown from './Markdown';
+import {Card} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   markdown: {
@@ -14,6 +15,21 @@ const useStyles = makeStyles((theme) => ({
   },
   marginB: {
     marginBottom: theme.spacing(2)
+  },
+  card: {
+    margin: '2rem 0',
+    padding: '20px'
+  },
+  image: {
+    maxHeight: 200,
+    maxWidth: 200
+  },
+  postHeader: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  postHeaderText: {
+
   }
 }));
 
@@ -28,14 +44,22 @@ export default function Main(props) {
       </Typography>
       <Divider className={classes.marginB}/>
       {posts.map((post) => (
-        <div key={post.id}>
-          <Typography component={RouterLink} to={`posts/${post.id}`} variant="h5" gutterBottom>
-            {post.title}
-          </Typography>
-          <div className={classes.markdown}>
-            <Markdown source={post.content} />
+        <Card key={post.id} className={classes.card}>
+          <div className={classes.postHeader}>
+            <div>
+              <Typography component={RouterLink} to={`posts/${post.id}`} variant="h5" gutterBottom>
+                {post.title}
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                <Markdown>{post.desc}</Markdown>
+              </Typography>
+            </div>
+            <img src={post.image} className={classes.image} alt={post.title} />
           </div>
-        </div>
+          <div className={classes.markdown}>
+            <Markdown>{post.content}</Markdown>
+          </div>
+        </Card>
       ))}
     </Grid>
   );

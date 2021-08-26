@@ -48,8 +48,8 @@ export default function BlogHome({posts}) {
     <>
       <MainFeaturedPost post={posts[0]}/>
       <Grid container spacing={4}>
-        <FeaturedPost post={posts[0]}/>
         <FeaturedPost post={posts[1]}/>
+        <FeaturedPost post={posts[2]}/>
       </Grid>
       <Grid container spacing={5} className={classes.mainGrid}>
         <Main title="From the firehose" posts={posts}/>
