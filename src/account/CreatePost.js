@@ -2,7 +2,7 @@ import React from "react";
 import MDEditor from '@uiw/react-md-editor';
 import {Grid, TextField, InputLabel, Button, IconButton} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { API, Storage,  } from 'aws-amplify';
+import { API, Storage } from 'aws-amplify';
 import { createPost } from '../graphql/mutations';
 
 export default class CreatePost extends React.Component {
