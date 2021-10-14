@@ -21,12 +21,25 @@ const useStyles = makeStyles((theme) => ({
     padding: '20px'
   },
   image: {
-    maxHeight: 200,
-    maxWidth: 200
+    maxWidth: '500px',
+    maxHeight: '500px',
+    margin: 'auto',
+    display: 'block',
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: '100%',
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      maxWidth: '500px',
+    },
+    "@media (min-width: 1280px)": {
+      maxWidth: '500px',
+    }
   },
   postHeader: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    // display: 'flex',
+    // justifyContent: 'space-between'
+    // maxHeight: '300px',
+    // maxWidth: '300px'
   },
   postHeaderText: {
 

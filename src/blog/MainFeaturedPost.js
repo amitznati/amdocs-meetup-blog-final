@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    height: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   }),
   overlay: {
     position: 'absolute',
