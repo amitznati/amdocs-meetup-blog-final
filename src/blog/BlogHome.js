@@ -46,13 +46,13 @@ export default function BlogHome({posts}) {
   const classes = useStyles();
   return (
     <>
-      <MainFeaturedPost post={posts[0]}/>
+      <MainFeaturedPost post={posts[Math.floor(Math.random()*posts.length)]}/>
       <Grid container spacing={4}>
         <FeaturedPost post={posts[1]}/>
         <FeaturedPost post={posts[2]}/>
       </Grid>
       <Grid container spacing={5} className={classes.mainGrid}>
-        <Main title="From the firehose" posts={posts}/>
+        <Main title="From the firehose" posts={posts} />
         <Sidebar
           title={sidebar.title}
           description={sidebar.description}
