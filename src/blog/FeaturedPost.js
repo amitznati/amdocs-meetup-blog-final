@@ -14,7 +14,7 @@ import { Link as RouterLink } from 'react-router-dom';
 const useStyles = makeStyles({
   card: {
     display: 'flex',
-    height: 180
+    height: 200
   },
   cardDetails: {
     flex: 1,
@@ -22,6 +22,10 @@ const useStyles = makeStyles({
   cardMedia: {
     width: 160,
   },
+  markdownWrap: {
+    height: 90,
+    overflow: 'hidden'
+  }
 });
 
 export default function FeaturedPost(props) {
@@ -40,10 +44,10 @@ export default function FeaturedPost(props) {
               <Typography variant="subtitle1" color="textSecondary">
                 {post.createdAt}
               </Typography>
-              <div>
-                <Markdown>{`${post.description.substring(0, 80)}...`}</Markdown>
+              <div className={classes.markdownWrap}>
+                <Markdown>{post.description}</Markdown>
               </div>
-              <Typography variant="subtitle1" color="primary">
+              <Typography variant="subtitle" color="primary">
                 Continue reading...
               </Typography>
             </CardContent>
