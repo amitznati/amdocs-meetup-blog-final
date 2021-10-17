@@ -11,10 +11,9 @@ import Header from './Header';
 import Footer from './Footer';
 import BlogHome from './BlogHome';
 import AccountHome from '../account';
+
+import {posts as postsMocks} from '../account/postsMock';
 import PostView from './PostView';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listPosts } from '../graphql/queries';
-import {onCreatePost} from '../graphql/subscriptions'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,23 +43,8 @@ export default function Blog() {
   const [posts, setPosts] = React.useState([]);
   const sortByDate = arr => arr.sort((a, b) => (new Date(b.createdAt) - new Date(a.createdAt)));
   useEffect(() => {
-      API.graphql(graphqlOperation(listPosts)).then(({data: {listPosts: {items}}}) => {
-        setPosts(sortByDate(items));
-      });
+    setPosts(sortByDate(postsMocks));
   }, []);
-  useEffect(() => {
-    const subscription = API.graphql(graphqlOperation(onCreatePost))
-      .subscribe({
-        next: ({value}) => {
-          console.log('subs callback: ', value.data.onCreatePost);
-          setPosts([value.data.onCreatePost, ...posts]);
-        },
-        error(errorValue) {
-          console.log('subs error: ', errorValue);
-        }
-      });
-    return () => subscription.unsubscribe();
-  }, [posts]);
 
   return (
     <Router>

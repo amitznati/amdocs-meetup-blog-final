@@ -2,8 +2,6 @@ import React from "react";
 import MDEditor from '@uiw/react-md-editor';
 import {Grid, TextField, InputLabel, Button, IconButton} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { API, Storage } from 'aws-amplify';
-import { createPost } from '../graphql/mutations';
 
 export default class CreatePost extends React.Component {
   constructor(props) {
@@ -25,33 +23,9 @@ export default class CreatePost extends React.Component {
   };
 
   onSubmit = () => {
-    const {imageInput, ...newPost} = this.state;
-    if (!(newPost.title && newPost.desc && newPost.content && imageInput)) return;
-    const image = imageInput;
-    function getImageName() {
-      const fileNameArr = image.name.split('.');
-      const imageFileExt = fileNameArr.pop();
-      return `${fileNameArr.join('.').replace(' ', '_')}_${Date.now()}.${imageFileExt}`;
-    }
-
-    const imageFileName = getImageName();
-    newPost.image = `https://d1xcntdnjjxto4.cloudfront.net/${imageFileName}`;
-
-    Storage.put(
-      imageFileName,
-      image,
-      {contentType: image.type})
-      .then(storageRes => {
-        console.log(storageRes);
-        API.graphql({
-          query: createPost,
-          variables: {input: newPost},
-          authMode: 'AMAZON_COGNITO_USER_POOLS'
-        }).then(() => {
-          this.imageRef.current.value = '';
-          this.setState({title: '', desc: '', content: '', imageInput: null});
-        });
-      });
+    const {title, desc, content, imageInput} = this.state;
+    if (!(title && desc && content && imageInput)) return;
+    console.log('saving post: ', {title, desc, content, imageInput});
   }
   render() {
     const {title, desc, content, imageInput} = this.state;

@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Markdown from './Markdown';
 import {useParams} from "react-router-dom";
-import { API, graphqlOperation } from 'aws-amplify';
-import { getPost } from '../graphql/queries';
+import {posts} from '../account/postsMock';
 
 export default function PostView() {
   const { postId } = useParams();
   const [post, setPost] = useState();
   useEffect(() => {
-    API.graphql(graphqlOperation(getPost, {id: postId}))
-      .then(({data}) => setPost(data.getPost))
+    setPost(posts.find(p => p.id.toString() === postId))
   },[postId]);
   if (!post) return <div>Loading...</div>;
   return (
