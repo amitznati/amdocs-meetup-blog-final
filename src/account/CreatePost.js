@@ -8,7 +8,7 @@ export default class CreatePost extends React.Component {
     super(props);
     this.state = {
       title: '',
-      desc: '',
+      description: '',
       content: '**Hello world!!!**',
       imageInput: null
     }
@@ -23,12 +23,12 @@ export default class CreatePost extends React.Component {
   };
 
   onSubmit = () => {
-    const {title, desc, content, imageInput} = this.state;
-    if (!(title && desc && content && imageInput)) return;
-    console.log('saving post: ', {title, desc, content, imageInput});
+    const {title, description, content, imageInput} = this.state;
+    if (!(title && description && content && imageInput)) return;
+    console.log('saving post: ', {title, description, content, imageInput});
   }
   render() {
-    const {title, desc, content, imageInput} = this.state;
+    const {title, description, content, imageInput} = this.state;
     return (
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -63,8 +63,8 @@ export default class CreatePost extends React.Component {
         </Grid>
         <Grid item xs={12}>
           <MDEditor
-            value={desc}
-            onChange={desc => this.setState({desc})}
+            value={description}
+            onChange={description => this.setState({description})}
           />
         </Grid>
         <Grid item xs={12}>

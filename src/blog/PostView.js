@@ -14,7 +14,7 @@ export default function PostView() {
     <div>
       <h1>{post.title}</h1>
       <h5>
-        <Markdown>{post.desc}</Markdown>
+        <Markdown>{post.description}</Markdown>
       </h5>
       <div style={{textAlign: 'center'}}>
         <img src={post.image} style={{maxHeight: 500, maxWidth: '100%'}} alt={post.title} />

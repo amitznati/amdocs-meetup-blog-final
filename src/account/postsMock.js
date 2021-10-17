@@ -40,7 +40,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a p
 
 Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.`,
   image: 'https://source.unsplash.com/random',
-  desc: `This blog post shows a few different types of content that are supported and styled with
+  description: `This blog post shows a few different types of content that are supported and styled with
 Material styles. Basic typography, images, and code are all supported.
 You can extend these by modifying \`Markdown.js\`.`,
   createdAt: '2021-08-17T21:20:08.436Z'
@@ -48,7 +48,7 @@ You can extend these by modifying \`Markdown.js\`.`,
 const post2 = {
   id: 2,
   title: '2 post',
-  desc: `Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+  description: `Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
 Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.`,
   content: `Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -70,7 +70,7 @@ Morbi leo risus, porta ac consectetur ac, vestibulum at eros.`,
 const post3 = {
   id: 3,
   title: '3 post',
-  desc: `Cum sociis natoque penatibus et **magnis** dis parturient montes`,
+  description: `Cum sociis natoque penatibus et **magnis** dis parturient montes`,
   content: `Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod.
 Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
@@ -90,7 +90,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a p
 const post4 = {
   id: 4,
   title: '4 post',
-  desc: `Cum sociis natoque penatibus et **magnis** dis parturient montes`,
+  description: `Cum sociis natoque penatibus et **magnis** dis parturient montes`,
   content: `Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod.
 Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,

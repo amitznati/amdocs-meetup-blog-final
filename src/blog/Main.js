@@ -64,7 +64,7 @@ export default function Main(props) {
                 {post.title}
               </Typography>
               <Typography variant="h6" gutterBottom>
-                <Markdown>{post.desc}</Markdown>
+                <Markdown>{post.description}</Markdown>
               </Typography>
             </div>
             <img src={post.image} className={classes.image} alt={post.title} />
