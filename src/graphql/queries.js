@@ -6,7 +6,7 @@ export const getPost = /* GraphQL */ `
     getPost(id: $id) {
       id
       title
-      desc
+      description
       content
       image
       username
@@ -28,7 +28,7 @@ export const listPosts = /* GraphQL */ `
       items {
         id
         title
-        desc
+        description
         content
         image
         username
@@ -57,7 +57,7 @@ export const postByUsername = /* GraphQL */ `
       items {
         id
         title
-        desc
+        description
         content
         image
         username
@@ -80,7 +80,7 @@ export const getComment = /* GraphQL */ `
       post {
         id
         title
-        desc
+        description
         content
         image
         username

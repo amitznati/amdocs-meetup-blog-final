@@ -6,7 +6,7 @@ export const onCreatePost = /* GraphQL */ `
     onCreatePost {
       id
       title
-      desc
+      description
       content
       image
       username
@@ -23,7 +23,7 @@ export const onUpdatePost = /* GraphQL */ `
     onUpdatePost {
       id
       title
-      desc
+      description
       content
       image
       username
@@ -47,7 +47,7 @@ export const onCreateComment = /* GraphQL */ `
       post {
         id
         title
-        desc
+        description
         content
         image
         username
@@ -69,7 +69,7 @@ export const onUpdateComment = /* GraphQL */ `
       post {
         id
         title
-        desc
+        description
         content
         image
         username
@@ -91,7 +91,7 @@ export const onDeleteComment = /* GraphQL */ `
       post {
         id
         title
-        desc
+        description
         content
         image
         username

@@ -52,7 +52,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
-  { id: 'desc', numeric: false, disablePadding: false, label: 'Description' }
+  { id: 'description', numeric: false, disablePadding: false, label: 'Description' }
 ];
 
 function EnhancedTableHead(props) {
@@ -305,7 +305,7 @@ export default function PostsList() {
                       <TableCell component="th" id={labelId} scope="row" >
                         <RouterLink to={`/posts/${row.id}`}>{row.title}</RouterLink>
                       </TableCell>
-                      <TableCell >{row.desc}</TableCell>
+                      <TableCell >{row.description}</TableCell>
                     </TableRow>
                   );
                 })}

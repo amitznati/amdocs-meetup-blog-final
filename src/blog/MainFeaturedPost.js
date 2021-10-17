@@ -56,7 +56,7 @@ export default function MainFeaturedPost(props) {
               {post.title}
             </Typography>
             <div >
-              <Markdown>{post.desc}</Markdown>
+              <Markdown>{post.description}</Markdown>
             </div>
             <Link variant="subtitle1" to={`posts/${post.id}`} component={RouterLink}>
               {/*{post.linkText}*/}

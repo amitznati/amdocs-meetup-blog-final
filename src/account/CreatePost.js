@@ -10,7 +10,7 @@ export default class CreatePost extends React.Component {
     super(props);
     this.state = {
       title: '',
-      desc: '',
+      description: '',
       content: '**Hello world!!!**',
       imageInput: null
     }
@@ -26,7 +26,7 @@ export default class CreatePost extends React.Component {
 
   onSubmit = () => {
     const {imageInput, ...newPost} = this.state;
-    if (!(newPost.title && newPost.desc && newPost.content && imageInput)) return;
+    if (!(newPost.title && newPost.description && newPost.content && imageInput)) return;
     const image = imageInput;
     function getImageName() {
       const fileNameArr = image.name.split('.');
@@ -49,12 +49,12 @@ export default class CreatePost extends React.Component {
           authMode: 'AMAZON_COGNITO_USER_POOLS'
         }).then(() => {
           this.imageRef.current.value = '';
-          this.setState({title: '', desc: '', content: '', imageInput: null});
+          this.setState({title: '', description: '', content: '', imageInput: null});
         });
       });
   }
   render() {
-    const {title, desc, content, imageInput} = this.state;
+    const {title, description, content, imageInput} = this.state;
     return (
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -89,8 +89,8 @@ export default class CreatePost extends React.Component {
         </Grid>
         <Grid item xs={12}>
           <MDEditor
-            value={desc}
-            onChange={desc => this.setState({desc})}
+            value={description}
+            onChange={description => this.setState({description})}
           />
         </Grid>
         <Grid item xs={12}>
