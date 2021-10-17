@@ -21,9 +21,8 @@ import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { Link as RouterLink } from 'react-router-dom';
-import {posts} from './postsMock';
-
-
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { postByUsername } from '../graphql/queries';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -204,7 +203,8 @@ export default function PostsList() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   React.useEffect(() => {
-    setRows(posts);
+    API.graphql(graphqlOperation(postByUsername, {username: Auth.user.username}))
+      .then(posts => setRows(posts.data.postByUsername.items));
   }, [])
 
   const handleRequestSort = (event, property) => {
